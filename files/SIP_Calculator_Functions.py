@@ -88,6 +88,7 @@ def future_value(principal_amount=1000,start_return_rate=5,end_return_rate=8,cal
 def convert_to_currency_str(items,convert_list=['Invested','Gain','Total Value','Base Monthly amount','Initial Invested','Step Up limit']):
     temp_dict={}
     locale.setlocale(locale.LC_MONETARY,'en_IN') 
+    locale.setlocale(locale.LC_ALL,'en_IN')
     for k,v in items.items():
         print(k,v)
         if k in convert_list:
