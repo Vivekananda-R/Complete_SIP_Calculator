@@ -91,7 +91,7 @@ if __name__ == '__main__':
             result['Initial Invested']=initial_amount
         if step_up:
             result['Step Up Percentage %']=step_up_percentage
-            result['Step Up every']=f'{str(step_up_percentage)} year'
+            result['Step Up every']=f'{str(step_up_year)} year'
             result['Step Up limit']=step_up_limit
         print(result)
         show_result(result,yearly_calculations)
