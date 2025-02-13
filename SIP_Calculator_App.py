@@ -16,17 +16,17 @@ hide_st_style = """
             </style>
             """
 #To reduce the whitespace at the top of the page
-# st.markdown("""
-#         <style>
-#                section.block-container {
-#                     padding-top: 1rem;
-#                     padding-bottom: 0rem;
-#                     padding-left: 5rem;
-#                     padding-right: 5rem;
-#                 }
-#         </style>
-#         """, unsafe_allow_html=True)
-# st.markdown(hide_st_style, unsafe_allow_html=True)
+st.markdown("""
+        <style>
+               section.block-container {
+                    padding-top: 1rem;
+                    padding-bottom: 0rem;
+                    padding-left: 5rem;
+                    padding-right: 5rem;
+                }
+        </style>
+        """, unsafe_allow_html=True)
+st.markdown(hide_st_style, unsafe_allow_html=True)
 
 col1, col2 = st.columns([2,1])
 
@@ -79,20 +79,21 @@ if not(step_up):
     step_up_limit=0
 
 submit=st.button('Submit')
-if submit:
-    result,yearly_calculations=future_value(principal_amount=principal_amount,calculated_return_rate=range,
-                        start_return_rate=start_return_rate,end_return_rate=end_return_rate,
-                        initial_amount=initial_amount,period=period,
-                        annual_stepup=step_up_percentage,stepup_everyyear=step_up_year,
-                        max_stepup_limit=step_up_limit,print_result=False)
-    result['Base Monthly amount']=principal_amount
-    if initial_corpus:
-        result['Initial Invested']=initial_amount
-    if step_up:
-        result['Step Up Percentage %']=step_up_percentage
-        result['Step Up every']=f'{str(step_up_percentage)} year'
-        result['Step Up limit']=step_up_limit
-    print(result)
-    show_result(result,yearly_calculations)
+if __name__ == '__main__': 
+    if submit:
+        result,yearly_calculations=future_value(principal_amount=principal_amount,calculated_return_rate=range,
+                            start_return_rate=start_return_rate,end_return_rate=end_return_rate,
+                            initial_amount=initial_amount,period=period,
+                            annual_stepup=step_up_percentage,stepup_everyyear=step_up_year,
+                            max_stepup_limit=step_up_limit,print_result=False)
+        result['Base Monthly amount']=principal_amount
+        if initial_corpus:
+            result['Initial Invested']=initial_amount
+        if step_up:
+            result['Step Up Percentage %']=step_up_percentage
+            result['Step Up every']=f'{str(step_up_percentage)} year'
+            result['Step Up limit']=step_up_limit
+        print(result)
+        show_result(result,yearly_calculations)
 
 
