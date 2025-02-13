@@ -1,6 +1,7 @@
 import streamlit as st
 import random
 # import locale
+import xlsxwriter
 import pandas as pd
 from io import BytesIO,StringIO
 
