@@ -31,10 +31,10 @@ hide_st_style = """
 col1, col2 = st.columns([2,1])
 
 with st.sidebar:
-    range=st.checkbox('Return Range',value=True)
-    number_input=st.checkbox('Number Input')
-    initial_corpus=st.checkbox('Inital Amount')
-    step_up=st.checkbox('Step Up SIP')
+    range=st.checkbox('Return Range',value=False)
+    number_input=st.checkbox('Number Input',value=False)
+    initial_corpus=st.checkbox('Inital Amount',value=False)
+    step_up=st.checkbox('Step Up SIP',value=False)
 with col1:
     if range:
         start_rr_str='Min Return Rate Expected'
@@ -85,7 +85,14 @@ if submit:
                         initial_amount=initial_amount,period=period,
                         annual_stepup=step_up_percentage,stepup_everyyear=step_up_year,
                         max_stepup_limit=step_up_limit,print_result=False)
+    result['Base Monthly amount']=principal_amount
+    if initial_corpus:
+        result['Initial Invested']=initial_amount
+    if step_up:
+        result['Step Up Percentage %']=step_up_percentage
+        result['Step Up every']=f'{str(step_up_percentage)} year'
+        result['Step Up limit']=step_up_limit
     print(result)
-    show_result(convert_to_currency_str(result))
+    show_result(result,yearly_calculations)
 
 
