@@ -6,7 +6,7 @@ import pandas as pd
 from io import BytesIO,StringIO
 
 def future_value(principal_amount=1000,start_return_rate=5,end_return_rate=8,calculated_return_rate=True,initial_amount=0,period=10,
-                    annual_stepup=10,stepup_everyyear=1,max_stepup_limit=50000,print_result=False):
+                    annual_stepup=10,stepup_percentage=False,stepup_everyyear=1,max_stepup_limit=50000,stop_year=0,print_result=False):
 
 
     if start_return_rate is None or start_return_rate<=0:
@@ -43,6 +43,7 @@ def future_value(principal_amount=1000,start_return_rate=5,end_return_rate=8,cal
     print('Annual Step Up percentage:',annual_stepup*100)
     print(f'Step Up every {stepup_everyyear} year:')
     print('Max Step Up amount:',max_stepup_limit)
+    print('Stop SIP year:',stop_year)
     if print_result:
         print('Number of iteration M*Y',period*12)
     for i in range((period*12)):
@@ -66,11 +67,17 @@ def future_value(principal_amount=1000,start_return_rate=5,end_return_rate=8,cal
                                     'Gain':round(present_amount-amount_invested,2),
                                     'CAGR %':round(return_rate*100,2),
                                     'Annual Step Up %':round(annual_stepup*100,2)})
-            
+            if (i//12)+1==stop_year:
+                principal_amount=0
+                continue
             if (stepup_everyyear>0) and (((i//12)+1)>0) and (((i//12)+1)%stepup_everyyear==0):
                 if print_result:
                     print('Entered principal calculator')
-                principal_amount=round(principal_amount,2)+round(round(principal_amount,2)*annual_stepup,2)
+                if stepup_percentage:
+                    principal_amount=round(principal_amount,2)+round(round(principal_amount,2)*annual_stepup,2)
+                else:
+                    principal_amount=round(round(principal_amount,2)+annual_stepup,2)
+                # principal_amount=round(principal_amount,2)+round(round(principal_amount,2)*annual_stepup,2)
             if principal_amount>=max_stepup_limit and max_stepup_limit>0:
                 if print_result:
                     print('Entered max','-'*30)
