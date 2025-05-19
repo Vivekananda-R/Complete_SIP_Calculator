@@ -54,7 +54,7 @@ def future_value(principal_amount=1000,start_return_rate=5,end_return_rate=8,cal
             print('Monthly Amount:',round(principal_amount,2))
             print('Monthly Return Rate:',(return_rate/12),'%')
             
-        present_amount=(round(present_amount,2)+round(principal_amount,2))*((1+(return_rate/12))**(1))
+        present_amount=(round(present_amount,2)+round(principal_amount,2))*((1+(return_rate))**(1/12))
         amount_invested=principal_amount+amount_invested
         if print_result:
             print('Amount invested:',round(amount_invested,2))
